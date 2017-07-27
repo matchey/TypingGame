@@ -8,7 +8,7 @@ He saw someone being bullied, but he turned a blind eye.
 bullied,blind
 誰かがいじめられているのを見たのに、彼は見ないふりをした。
 When Nick and I cheated on an exam, I was suspended from school. As for Nick, he got away with it.
-cheat,suspended,As,for,get,away,with
+cheated,suspended,As,for,got,away,with
 ニックと僕がテストでカンニングしたとき、僕は停学処分。ニックの方はまんまと逃れた。
 They are hostile to Richard because they are jealous of his wealth and status.
 hostile,jealous,wealth,status
