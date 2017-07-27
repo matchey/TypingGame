@@ -9,6 +9,7 @@
 #include <vector>
 #include <chrono>
 #include <thread>
+#include "mstring.h"
 
 using namespace std;/*}}}*/
 
@@ -75,6 +76,7 @@ namespace bun_type{
 		int typesu;//穴埋めタイプ文字数
 		public:
 		Duo(){}
+		~Duo();
 		Duo(ifstream::pos_type&,string);
 		int get_tngs() const{ return tangosu; }
 		int get_typs() const{ return typesu; }
@@ -95,6 +97,10 @@ namespace bun_type{
 			tmp+=tango[i].length();
 		}
 		typesu=tmp;
+	}/*}}}*/
+
+	Duo::~Duo()/*{{{*/
+	{
 	}/*}}}*/
 
 	void Duo::input(ifstream::pos_type pos, string fname)/*{{{*/
@@ -269,17 +275,27 @@ namespace bun_type{
 
 	string chssction()/*{{{*/
 	{
+		string cmd = "cat ";
 		string section;
+		vector<string> sections;
 		int ss;
 		string fname = "/Users/matchey/Programs/cpp/Asobi/Duo/duobuntxt/section";
 		cout<<"学習するセクションを入力(1~45):";
-		cin>>section;
-		ss = atoi(section.c_str());
-		if(ss>0&&ss<46){
-			fname += section+".txt";
-		}else{
-			fname = "/Users/matchey/Programs/cpp/Asobi/Duo/duobuntxt/duobun.txt";
+		getline(cin, section);
+		sections = split(section, ' ');
+		for(auto it=sections.begin(); it!=sections.end(); ++it){
+			ss = atoi(it->c_str());
+			if(ss>0&&ss<46){
+				cmd += fname+*it+".txt ";
+			}else{
+				fname = "/Users/matchey/Programs/cpp/Asobi/Duo/duobuntxt/duobun.txt";
+				cmd = "cat " + fname + " ";
+			}
 		}
+		cmd += "> wordlist.tmp";
+		system(cmd.c_str());
+		fname = "wordlist.tmp";
+		
 		return fname;
 	}/*}}}*/
 
@@ -517,6 +533,7 @@ namespace bun_type{
 			}
 			/*}}}*/
 		}
+		system("rm wordlist.tmp");
 	}/*}}}*/
 
 }//bun_type
